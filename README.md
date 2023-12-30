@@ -27,7 +27,7 @@
 - [Git](https://git-scm.com/downloads)
 
 ```
-$ git clone https://github.com/N0rz3/GitSint.git
+$ git clone https://github.com/N0rz3/Phunter.git
 $ cd ./Phunter
 $ pip3 install -r requirements.txt
 ```
