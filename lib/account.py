@@ -8,7 +8,7 @@ from .text import *
 
 class Amazon:
     def setup_driver():
-        browser = input(f"[{YELLOW}?{WHITE}] What is your browser? Chrome or Firefox? (c/f): ")
+        browser = input(f"[{YELLOW}?{WHITE}] What's your browser? Chrome or Firefox? (c/f): ")
 
         if browser.lower() == 'c':
             options = Options()
