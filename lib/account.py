@@ -3,23 +3,40 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from .text import *
 
 class Amazon:
     def setup_driver():
-        options = Options()
-        options.add_argument('--headless')
+        browser = input(f"[{YELLOW}?{WHITE}] What is your browser? Chrome or Firefox? (c/f): ")
 
-        service = Service(ChromeDriverManager().install())
+        if browser.lower() == 'c':
+            options = Options()
+            options.add_argument('--headless')
 
-        try:
-            driver = webdriver.Chrome(service=service, options=options)
-            print(f"[{GREEN}>{WHITE}] Driver setup completed\n")
+            service = Service(ChromeDriverManager().install())
 
-            return driver
+            try:
+                driver = webdriver.Chrome(service=service, options=options)
+                print(f"[{GREEN}>{WHITE}] Driver setup completed\n")
 
-        except Exception:
-            print(f"[{RED}-{WHITE}] Error while driver setup\n")
+                return driver
+
+            except Exception:
+                print(f"[{RED}-{WHITE}] Error while driver setup\n")
+
+        elif browser.lower() == 'f':
+            options = FirefoxOptions()
+            options.add_argument('--headless')
+
+            try:
+                driver = webdriver.Firefox(options=options)
+                print(f"[{GREEN}>{WHITE}] Driver setup completed\n")
+
+                return driver
+
+            except Exception:
+                print(f"[{RED}-{WHITE}] Error while driver setup\n")
 
     def amazon(p_n, output=False, file=None):
         if output:
