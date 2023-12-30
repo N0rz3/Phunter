@@ -49,7 +49,7 @@ options:
                         get info by a file containing phone numbers
   -v, --verify          check your version, update(s), services...
   -o [OUTPUT], --output [OUTPUT]
-                        save your results in file (only with args: --amazon/-a , --person/-p)
+                        give a file to save the output (only with args: --amazon/-a , --person/-p)
 ```
 
 ### Example usages:
