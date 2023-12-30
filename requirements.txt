@@ -1,0 +1,5 @@
+asyncio
+httpx
+bs4
+argparse
+selenium
