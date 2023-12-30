@@ -2,21 +2,40 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
-from time import sleep
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from .text import *
+from time import sleep
 
 class Annuaire:
     def setup_driver():
-        service = Service(ChromeDriverManager().install())
+        browser = input(f"[{YELLOW}?{WHITE}] What is your browser? Chrome or Firefox? (c/f): ")
 
-        try:
-            driver = webdriver.Chrome(service=service)
-            print(f"[{GREEN}>{WHITE}] Driver setup completed\n")
+        if browser.lower() == 'c':
+            options = Options()
 
-            return driver
+            service = Service(ChromeDriverManager().install())
 
-        except Exception:
-            print(f"[{RED}-{WHITE}] Error while driver setup\n")
+            try:
+                driver = webdriver.Chrome(service=service, options=options)
+                print(f"[{GREEN}>{WHITE}] Driver setup completed\n")
+
+                return driver
+
+            except Exception:
+                print(f"[{RED}-{WHITE}] Error while driver setup\n")
+
+        elif browser.lower() == 'f':
+            options = FirefoxOptions()
+
+            try:
+                driver = webdriver.Firefox(options=options)
+                print(f"[{GREEN}>{WHITE}] Driver setup completed\n")
+
+                return driver
+
+            except Exception:
+                print(f"[{RED}-{WHITE}] Error while driver setup\n")
 
     def annuaire(p_n, output=False, file=None):
         if output:
