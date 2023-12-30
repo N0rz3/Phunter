@@ -17,7 +17,7 @@
 - reputation
 - various scraped information
 - spammer or not
-- connect to amazon
+- connect to amazon or not
 - owner
 
 
