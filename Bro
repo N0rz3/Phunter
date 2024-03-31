@@ -1,0 +1,12 @@
+-h, --help            show this help message and exit
+  -t [$ python3 phunter.py], --target [+79518328335]
+                        get info by phone number
+  -a [$ python3 phunter.py], --amazon [+79518328335]
+                        get confirmation whether Amazon linked by phone number
+  -p [PERSON], --person [PERSON]
+                        get owner of phone number with inversed annual (Page Blanche)
+  -f [FILE], --file [FILE]
+                        get info by a file containing phone numbers
+  -v, --verify          check your version, update(s), services...
+  -o [OUTPUT], --output [OUTPUT]
+                        give a file to save the output (only with args: --amazon/-a , --person/-p)
