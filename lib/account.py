@@ -49,8 +49,6 @@ class Amazon:
         if browser == 'f':
             input(f"\n[{RED}!{WHITE}] Press ENTER when you have validate the 🤖 Captcha")
             print()
-        else:
-            pass
         
         try:
             driver.find_element(By.XPATH, '//*[@id="ap_email"]').send_keys(p_n)
