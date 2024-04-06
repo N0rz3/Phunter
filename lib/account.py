@@ -12,28 +12,26 @@ class Amazon:
 
         if browser.lower() == 'c':
             options = Options()
-            options.add_argument('--headless')
-
+            
             service = Service(ChromeDriverManager().install())
 
             try:
                 driver = webdriver.Chrome(service=service, options=options)
                 print(f"[{GREEN}>{WHITE}] Driver setup completed\n")
 
-                return driver
+                return driver, browser.lower()
 
             except Exception:
                 print(f"[{RED}-{WHITE}] Error while driver setup\n")
 
         elif browser.lower() == 'f':
             options = FirefoxOptions()
-            options.add_argument('--headless')
 
             try:
                 driver = webdriver.Firefox(options=options)
                 print(f"[{GREEN}>{WHITE}] Driver setup completed\n")
 
-                return driver
+                return driver, browser.lower()
 
             except Exception:
                 print(f"[{RED}-{WHITE}] Error while driver setup\n")
@@ -42,12 +40,18 @@ class Amazon:
         if output:
             succes = 0
 
-        driver = Amazon.setup_driver()
+        driver, browser = Amazon.setup_driver()
         print(f"[{YELLOW}~{WHITE}] Phone number: {BLUE}{p_n}{WHITE}")
 
         driver.get('https://www.amazon.com/ap/signin?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2F%3F_encoding%3DUTF8%26ref_%3Dnav_ya_signin&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&')
         print(f"[{YELLOW}={WHITE}] Checking...")
-
+        
+        if browser == 'f':
+            input(f"\n[{RED}!{WHITE}] Press ENTER when you have validate the 🤖 Captcha")
+            print()
+        else:
+            pass
+        
         try:
             driver.find_element(By.XPATH, '//*[@id="ap_email"]').send_keys(p_n)
 
@@ -59,21 +63,30 @@ class Amazon:
             element = driver.find_element(By.ID, 'auth-password-missing-alert')
 
             if element:
-                print(f"[{GREEN}>{WHITE}] Connected to Amazon")
+                print(f"[{GREEN}>{WHITE}] Is connected to Amazon")
                 if output != False:
                     with open(file, 'w') as output_file:
                         output_file.write(f"[>] {p_n} is connected to Amazon")
                         succes += 1
 
             else:
-                print(f"[{RED}-{WHITE}] Not connected to Amazon")
+                print(f"[{RED}-{WHITE}] Is not connected to Amazon")
                 if output != False:
                     with open(file, 'w') as output_file:
                         output_file.write(f"[-] {p_n} is not connected to Amazon")
                         succes += 1
 
         except:
-            print(f"[{RED}-{WHITE}] Not connected to Amazon")
+            print(f"[{RED}-{WHITE}] Is not connected to Amazon")
+            if output != False:
+                    with open(file, 'w') as output_file:
+                        output_file.write(f"[-] {p_n} is not connected to Amazon")
+                        succes += 1
+
+        driver.quit()
+
+        if output:
+            print(f"\n[{GREEN}>{WHITE}] ✍️ Output saved ({GREEN}{succes}{WHITE})")
             if output != False:
                     with open(file, 'w') as output_file:
                         output_file.write(f"[-] {p_n} is not connected to Amazon")
